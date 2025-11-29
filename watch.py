@@ -31,6 +31,7 @@ import time
 import cv2
 from typing import Optional
 
+from config import EnvironmentConfig, NetworkConfig, PPOConfig
 from model import PPOActorCritic
 from ppo_agent import PPOAgent
 from utils import FrameStack, PixelObservationWrapper
@@ -40,20 +41,20 @@ from constants import (
 )
 
 
-def _create_agent_environment(stack_size: int) -> gym.Env:
+def _create_agent_environment(env_config: EnvironmentConfig) -> gym.Env:
     """!
     @brief Create agent environment with preprocessing wrappers
     
     @param stack_size Number of frames to stack
     @return Wrapped environment
     """
-    env = gym.make(ENV_NAME, render_mode='rgb_array', use_lidar=False)
-    env = PixelObservationWrapper(env)
-    env = FrameStack(env, stack_size=stack_size)
+    env = gym.make(env_config.env_name, render_mode='rgb_array', use_lidar=False)
+    env = PixelObservationWrapper(env, env_config)
+    env = FrameStack(env, env_config)
     return env
 
 
-def _create_human_environment(render_mode: str) -> Optional[gym.Env]:
+def _create_human_environment(render_mode: str, env_config: EnvironmentConfig) -> Optional[gym.Env]:
     """!
     @brief Create human-viewable environment
     
@@ -61,7 +62,7 @@ def _create_human_environment(render_mode: str) -> Optional[gym.Env]:
     @return Environment or None if not in human mode
     """
     if render_mode == 'human':
-        return gym.make(ENV_NAME, render_mode='human', use_lidar=False)
+        return gym.make(env_config.env_name, render_mode='human', use_lidar=False)
     return None
 
 
@@ -88,8 +89,8 @@ def _load_trained_agent(
         n_actions = N_ACTIONS
     
     # Create and load agent
-    policy_net = PPOActorCritic(input_channels=stack_size, n_actions=n_actions)
-    agent = PPOAgent(policy_net=policy_net, n_actions=n_actions, device=device)
+    policy_net = PPOActorCritic(config=NetworkConfig())
+    agent = PPOAgent(n_actions=n_actions, policy_net=policy_net, config=PPOConfig(), device=device)
     agent.load(model_path)
     agent.policy_net.eval()
     
@@ -134,8 +135,8 @@ def watch_agent(
     model_path: str, 
     n_episodes: int = 5, 
     render_mode: str = 'human', 
-    stack_size: int = FRAME_STACK_SIZE, 
-    delay: float = 0.01
+    delay: float = 0.01,
+    env_config: EnvironmentConfig = EnvironmentConfig()
 ) -> None:
     """!
     @brief Visualize trained agent performance
@@ -166,17 +167,17 @@ def watch_agent(
     
     # Initialize agent environment (for observations)
     print("Initializing Agent Environment...")
-    env = _create_agent_environment(stack_size)
+    env = _create_agent_environment(env_config)
     print("  ✓ All wrappers applied\n")
     
     # Initialize human environment (for visualization)
-    human_env = _create_human_environment(render_mode)
+    human_env = _create_human_environment(render_mode, env_config)
     if human_env:
         print("  ✓ Human display initialized\n")
     
     # Load trained model
     print(f"Loading model from {model_path}...")
-    agent = _load_trained_agent(model_path, stack_size, device)
+    agent = _load_trained_agent(model_path, env_config.stack_size, device)
     print("  ✓ Model loaded successfully\n")
     
     print(f"\nStarting to watch agent for {n_episodes} episode(s)...")
@@ -269,7 +270,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     
-    watch_agent(model_path=args.model, n_episodes=args.episodes, delay=args.delay)
+    watch_agent(model_path=args.model, n_episodes=args.episodes, delay=args.delay, env_config=EnvironmentConfig())
 
 if __name__ == "__main__":
     main()
