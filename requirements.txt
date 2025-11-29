@@ -1,0 +1,35 @@
+# ============================================================================
+# FlappyBird PPO - Python Dependencies
+# ============================================================================
+
+# Deep Learning Framework
+# ------------------------
+torch>=2.0.0              # PyTorch for neural networks
+torchvision>=0.15.0       # Vision utilities (included with torch)
+
+# Reinforcement Learning
+# -----------------------
+gymnasium>=0.29.0         # OpenAI Gym successor for RL environments
+flappy-bird-gymnasium>=0.3.0  # FlappyBird environment
+
+# Numerical Computing
+# -------------------
+numpy>=1.24.0             # Array operations and linear algebra
+
+# Visualization
+# -------------
+matplotlib>=3.7.0         # Plotting training metrics
+opencv-python>=4.8.0      # Image preprocessing (cv2)
+pillow>=9.5.0             # Image I/O
+
+# Training Utilities
+# ------------------
+tqdm>=4.65.0              # Progress bars for training loop
+
+# ============================================================================
+# Installation:
+#   pip install -r requirements.txt
+#
+# For GPU support, ensure CUDA-compatible PyTorch is installed:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# ============================================================================

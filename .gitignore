@@ -1,34 +1,53 @@
-# Python
+# Python bytecode and cache
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+
+# Virtual environments
 env/
 venv/
 ENV/
 .venv
+env.bak/
+venv.bak/
 
-# PyTorch
+# PyTorch models (keep best_model.pth in runs for reference)
 *.pth
 *.pt
+!runs/*/checkpoints/final_model.pth
 
-# Jupyter
+# Jupyter notebooks
 .ipynb_checkpoints/
 *.ipynb
 
-# IDE
+# IDE and editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
 
-# Data
-data/
-logs/
-checkpoints/
-runs/
+# Training outputs
+runs/*/checkpoints/*.pth
+runs/*/plots/
+runs/*/logs/
+agent_vision_debug.png
 
-# OS
+# Documentation
+docs/
+html/
+latex/
+
+# OS specific
 .DS_Store
 Thumbs.db
+*.bak
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
