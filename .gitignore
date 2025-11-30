@@ -34,8 +34,8 @@ venv.bak/
 
 # Training outputs
 runs/*/checkpoints/*.pth
-runs/*/plots/
-runs/*/logs/
+runs/*/plots/*.png
+runs/*/logs/*.csv
 agent_vision_debug.png
 
 # Documentation
