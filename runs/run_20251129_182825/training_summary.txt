@@ -1,0 +1,72 @@
+============================================================
+Training Run Summary
+============================================================
+
+Run Directory: runs/run_20251129_182825
+Timestamp: 2025-11-30 05:16:32
+Device: cuda
+
+============================================================
+TRAINING CONFIGURATION
+============================================================
+
+Environment Settings:
+  Environment: FlappyBird-v0
+  Frame Stack Size: 4
+  Image Size: 84x84
+  Action Space: 2
+
+PPO Hyperparameters:
+  Learning Rate: 5e-05
+  Gamma (Discount): 0.99
+  GAE Lambda: 0.95
+  Clip Range: 0.2
+  Value Coefficient: 0.5
+  Entropy Coefficient: 0.03
+  Max Gradient Norm: 0.5
+
+Training Parameters:
+  Total Episodes: 3000
+  Rollout Steps: 2048
+  PPO Epochs: 4
+  Batch Size: 256
+  Save Frequency: 100 episodes
+
+Network Architecture:
+  Input Channels: 4
+  Output Actions: 2
+  Total Parameters: 1,685,667
+  Trainable Parameters: 1,685,667
+
+============================================================
+TRAINING RESULTS
+============================================================
+
+Performance Metrics:
+  Best Reward: 53.00
+  Final Reward: 9.00
+  Average Reward (last 10): 30.80
+  Average Reward (last 50): 25.47
+  Average Reward (last 100): 25.36
+  Average Reward (all): 18.44
+
+Episode Statistics:
+  Total Episodes Completed: 3000
+  Total Games Played: 22067
+  Average Games per Episode: 7.36
+  Best Pipes Passed (single game): 53
+  Average Pipes per Episode: 17.27
+
+Loss Statistics:
+  Final Policy Loss: -0.0012
+  Final Value Loss: 0.1343
+  Final Entropy: 0.1092
+  Average Policy Loss: -0.0025
+  Average Value Loss: 0.1419
+  Average Entropy: 0.1156
+
+============================================================
+Checkpoints saved in: runs/run_20251129_182825/checkpoints
+Training logs saved in: runs/run_20251129_182825/logs
+Plots saved in: runs/run_20251129_182825/plots
+============================================================

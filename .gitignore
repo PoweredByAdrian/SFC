@@ -13,12 +13,17 @@ ENV/
 env.bak/
 venv.bak/
 
+# Training outputs
+runs/*/checkpoints/*.pth
+runs/*/plots/*.png
+runs/*/logs/*.csv
+agent_vision_debug.png
+
 # PyTorch models (keep best_model.pth in runs for reference)
 *.pth
 *.pt
 !runs/*/checkpoints/final_model.pth
 !runs/*/plots/metrics_episode_3000.png
-!runs/*/logs/*.csv
 
 # Jupyter notebooks
 .ipynb_checkpoints/
@@ -32,11 +37,7 @@ venv.bak/
 *.sublime-workspace
 *.sublime-project
 
-# Training outputs
-runs/*/checkpoints/*.pth
-runs/*/plots/*.png
-runs/*/logs/*.csv
-agent_vision_debug.png
+
 
 # Documentation
 docs/
