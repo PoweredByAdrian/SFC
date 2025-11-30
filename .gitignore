@@ -18,6 +18,7 @@ venv.bak/
 *.pt
 !runs/*/checkpoints/final_model.pth
 !runs/*/plots/metrics_episode_3000.png
+!runs/*/logs/*.csv
 
 # Jupyter notebooks
 .ipynb_checkpoints/
